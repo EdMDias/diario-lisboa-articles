@@ -1,0 +1,5 @@
+#!/bin/bash
+# Wrapper script to use colab-cli with local config
+
+export COLAB_CLI_CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)/.colab-config"
+colab-cli "$@"

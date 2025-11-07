@@ -29,6 +29,9 @@ data/
 client_secrets.json
 credentials.json
 
+# Local colab-cli config
+.colab-config/
+
 # Model weights
 models/
 weights/
