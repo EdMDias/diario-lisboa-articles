@@ -1,0 +1,34 @@
+# DOTS OCR Requirements
+# For local or cloud deployment
+
+# Core dependencies
+torch==2.7.0
+torchvision==0.22.0
+torchaudio==2.7.0
+
+# DOTS OCR - will be installed from git
+# Install with: pip install git+https://github.com/rednote-hilab/dots.ocr.git
+
+# vLLM for efficient inference (recommended)
+vllm>=0.11.0
+
+# Alternative: Transformers for Hugging Face inference
+transformers>=4.45.0
+accelerate>=0.21.0
+qwen-vl-utils>=0.0.8
+
+# Image processing
+Pillow>=10.0.0
+pdf2image>=1.16.3
+pypdfium2>=4.26.0
+
+# Progress tracking and utilities
+tqdm>=4.66.0
+psutil>=5.9.0
+
+# For cloud deployment
+python-dotenv>=1.0.0
+
+# Optional: Flash Attention 2 for faster inference
+# Uncomment if you have CUDA 11.8+ and compatible GPU
+# flash-attn>=2.5.0

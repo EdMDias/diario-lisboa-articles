@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  vllm-server:
+    image: vllm/vllm-openai:v0.11.0
+    container_name: dots-ocr-vllm
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ./models:/models
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: >
+      --model rednote-hilab/dots.ocr
+      --trust-remote-code
+      --async-scheduling
+      --gpu-memory-utilization 0.95
+      --host 0.0.0.0
+      --port 8000
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  ocr-processor:
+    build:
+      context: .
+      dockerfile: Dockerfile.ocr
+    container_name: dots-ocr-processor
+    depends_on:
+      - vllm-server
+    volumes:
+      - ./data:/app/data
+      - ./ocr_output:/app/ocr_output
+      - ./ocr_processor.py:/app/ocr_processor.py
+    environment:
+      - VLLM_URL=http://vllm-server:8000/v1
+    command: >
+      python ocr_processor.py
+      --data-dir /app/data
+      --output-dir /app/ocr_output
+      --vllm-url http://vllm-server:8000/v1

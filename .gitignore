@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# OCR output
+ocr_output/
+*.log
+progress.json
+batch_results.json
+
+# Data files
+data/
+*.jpg
+*.jpeg
+*.png
+*.pdf
+
+# Credentials
+.credentials/
+client_secrets.json
+credentials.json
+
+# Model weights
+models/
+weights/
+DotsOCR/
+dots.ocr/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+test_ocr_result.json
+batch_config.json

@@ -1,0 +1,26 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements-ocr.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements-ocr.txt
+
+# Install DOTS OCR
+RUN pip install --no-cache-dir git+https://github.com/rednote-hilab/dots.ocr.git
+
+# Copy processing script
+COPY ocr_processor.py .
+
+# Create directories
+RUN mkdir -p /app/data /app/ocr_output
+
+CMD ["python", "ocr_processor.py", "--help"]
