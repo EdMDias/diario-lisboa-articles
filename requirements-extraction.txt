@@ -1,0 +1,14 @@
+# Requirements for Article Extraction Pipeline
+# Install with: uv pip install -r requirements-extraction.txt
+
+# Graph-based article segmentation
+networkx==3.6.1
+
+# Semantic embeddings for text similarity
+sentence-transformers>=5.2.0
+numpy>=2.4.0
+
+# Note: sentence-transformers will also install:
+# - torch (for neural network inference)
+# - transformers (for model loading)
+# - scikit-learn (for similarity computations)

@@ -12,6 +12,9 @@ torchaudio==2.7.0
 # vLLM for efficient inference (recommended)
 vllm>=0.11.0
 
+# OpenAI client for vLLM API (required for async batch processing)
+openai>=1.0.0
+
 # Alternative: Transformers for Hugging Face inference
 transformers>=4.45.0
 accelerate>=0.21.0
@@ -29,6 +32,9 @@ psutil>=5.9.0
 # For cloud deployment
 python-dotenv>=1.0.0
 
-# Optional: Flash Attention 2 for faster inference
+# Optional: Flash Attention 2 for faster inference (3-5x speedup)
 # Uncomment if you have CUDA 11.8+ and compatible GPU
 # flash-attn>=2.5.0
+
+# Optional: GPU monitoring for batch processing
+# nvidia-ml-py3>=7.352.0
